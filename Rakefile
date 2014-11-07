@@ -19,3 +19,13 @@ task :test_app do
   ENV['LIB_NAME'] = 'spree_checkout'
   Rake::Task['extension:test_app'].invoke
 end
+
+desc 'Generates ember app for production'
+task :ember_build do
+  Dir.chdir("ember-checkout")
+  `ember build --environment production`
+  `cp dist/assets/vendor.js ../app/assets/javascripts/spree/frontend/ember_checkout_vendor.js`
+  `cp dist/assets/ember-checkout.js ../app/assets/javascripts/spree/frontend/ember_checkout.js`
+  `cp dist/assets/vendor.css ../app/assets/stylesheets/spree/frontend/ember_checkout_vendor.css`
+  `cp dist/assets/ember-checkout.css ../app/assets/stylesheets/spree/frontend/ember_checkout.css`
+end
