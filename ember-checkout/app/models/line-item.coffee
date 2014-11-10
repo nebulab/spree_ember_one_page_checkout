@@ -8,6 +8,7 @@ LineItem = DS.Model.extend {
   total: DS.attr('number')
 
   order: DS.belongsTo('order')
+  variant: DS.belongsTo('variant')
 }
 
 `export default LineItem`
