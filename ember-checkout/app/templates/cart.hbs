@@ -1,3 +1,9 @@
 {{number}}
 
+{{#each line_item in line_items}}
+  {{line_item.variant.name}} {{line_item.display_amount}}
+  <br />
+  Quantity: {{line_item.quantity}}
+{{/each}}
+
 {{outlet}}

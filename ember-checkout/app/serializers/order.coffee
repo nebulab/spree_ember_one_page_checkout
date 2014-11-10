@@ -7,6 +7,10 @@ OrderSerializer = DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin,
     payload[typeKey] = rawPayload
     payload[typeKey]['id'] = payload[typeKey]['number']
     @_super store, primaryType, payload, recordId
+
+  attrs: {
+    line_items: { embedded: 'always' }
+  }
 )
 
 `export default OrderSerializer`
