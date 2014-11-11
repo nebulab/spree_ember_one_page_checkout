@@ -10,6 +10,9 @@ OrderSerializer = DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin,
 
   attrs: {
     line_items: { embedded: 'always' }
+    adjustments: { embedded: 'always' }
+    ship_address: { embedded: 'always' }
+    shipments: { embedded: 'always' }
   }
 )
 
