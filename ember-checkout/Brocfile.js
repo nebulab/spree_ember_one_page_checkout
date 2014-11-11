@@ -4,9 +4,23 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var app = new EmberApp({
   fingerprint: {
-    extensions: []
+    enabled: false
   },
-  storeConfigInMeta: false
+  storeConfigInMeta: false,
+  outputPaths: {
+    app: {
+      css: '/stylesheets/ember_checkout/app.css',
+      js: '/javascripts/ember_checkout/app.js'
+    },
+    vendor: {
+      css: '/stylesheets/ember_checkout/vendor.css',
+      js: '/javascripts/ember_checkout/vendor.js'
+    },
+    testSupport: {
+      css: '/stylesheets/ember_checkout/test-support.css',
+      js: '/javascripts/ember_checkout/test-support.js'
+    }
+  }
 });
 
 // Use `app.import` to add additional libraries to the generated

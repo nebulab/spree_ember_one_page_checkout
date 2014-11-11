@@ -2,7 +2,6 @@
 Placeholder manifest file.
 the installer will append this file to the app vendored assets here: 'vendor/assets/stylesheets/spree/frontend/all.css'
 
-//= require 'spree/frontend/ember_checkout_vendor'
-//= require 'spree/frontend/ember_checkout'
+//= require 'ember_checkout/vendor'
+//= require 'ember_checkout/app'
 */
-
