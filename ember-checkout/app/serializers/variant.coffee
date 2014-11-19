@@ -1,6 +1,6 @@
 `import DS from 'ember-data'`
 
-VariantSerializer = DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin,
+VariantSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin,
   attrs: {
     images: { embedded: 'always' }
   }

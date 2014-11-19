@@ -1,8 +1,8 @@
 `import DS from 'ember-data'`
 
-ShipmentSerializer = DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin,
+ShipmentSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin,
   attrs: {
-    shipping_methods: { embedded: 'always' }
+    shipping_rates: { embedded: 'always' }
   }
 )
 

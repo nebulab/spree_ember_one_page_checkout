@@ -1,6 +1,6 @@
 `import DS from 'ember-data'`
 
-OrderSerializer = DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin,
+OrderSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin,
   extractSingle: (store, primaryType, rawPayload, recordId) ->
     typeKey = primaryType.typeKey
     payload = {}
@@ -12,6 +12,7 @@ OrderSerializer = DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin,
     line_items: { embedded: 'always' }
     adjustments: { embedded: 'always' }
     ship_address: { embedded: 'always' }
+    bill_address: { embedded: 'always' }
     shipments: { embedded: 'always' }
   }
 )
