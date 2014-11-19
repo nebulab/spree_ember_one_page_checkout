@@ -1,8 +1,7 @@
 `import Ember from 'ember'`
 
-CartRoute = Ember.Route.extend(
-  model: ->
-    @store.find('order', Spree.current_order_id)
-)
+CartRoute = Ember.Route.extend
+  beforeModel: ->
+    @transitionTo('checkout.cart')
 
 `export default CartRoute`
