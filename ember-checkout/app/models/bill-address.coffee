@@ -1,6 +1,6 @@
 `import DS from 'ember-data'`
 
-ShipAddress = DS.Model.extend
+BillAddress = DS.Model.extend
   firstname: DS.attr('string')
   lastname: DS.attr('string')
   address1: DS.attr('string')
@@ -12,4 +12,4 @@ ShipAddress = DS.Model.extend
 
   order: DS.belongsTo('order')
 
-`export default ShipAddress`
+`export default BillAddress`

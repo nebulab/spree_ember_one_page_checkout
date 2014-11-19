@@ -1,8 +1,9 @@
 `import DS from 'ember-data'`
 
 Shipment = DS.Model.extend
+  selected_shipping_rate_id: DS.attr('number')
+
   order: DS.belongsTo('order')
-  shipping_methods: DS.hasMany('shipping-method')
-  display_discounted_cost: DS.attr('string')
+  shipping_rates: DS.hasMany('shipping-rate')
 
 `export default Shipment`
