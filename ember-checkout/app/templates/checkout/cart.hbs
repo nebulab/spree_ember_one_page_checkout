@@ -1,0 +1,70 @@
+<div data-hook="inside_cart_form">
+
+  <div data-hook="cart_items">
+    <table id="cart-detail" data-hook>
+      <thead>
+        <tr data-hook="cart_items_headers">
+          <th class="cart-item-description-header" colspan="2">Item</th>
+          <th class="cart-item-price-header">Price</th>
+          <th class="cart-item-quantity-header">Qty</th>
+          <th class="cart-item-total-header">Total</th>
+          <th class="cart-item-delete-header"></th>
+        </tr>
+      </thead>
+
+      {{view 'checkout/line-item-list' content=line_items}}
+
+      <tr class="cart-subtotal">
+        <td colspan="4" align='right'><h5>Subtotal ({{total_quantity}} item)</h5></th>
+        <td colspan><h5>{{display_item_total}}</h5></td>
+        <td></td>
+      </tr>
+      <tbody id="cart_adjustments" data-hook>
+        {{#each adjustment in adjustments}}
+          <tr class="adjustment">
+            <td colspan="4" align='right'><h5>{{adjustment.type}}: {{adjustment.label}}</h5></td>
+            <td colspan='2'>
+              <h5><%= Spree::Money.new(adjustments.sum(&:amount), :currency => @order.currency) %></h5>
+            </td>
+          </tr>
+        {{/each}}
+
+        {{#each adjustment in adjustments}}
+          <tr class="adjustment">
+            <td colspan="4" align='right'><h5>{{adjustment.type}}: {{adjustment.label}}</h5></td>
+            <td colspan='2'>
+              <h5><%= Spree::Money.new(adjustments.sum(&:amount), :currency => @order.currency) %></h5>
+            </td>
+          </tr>
+        {{/each}}
+
+        {{#each shipment in shipments}}
+          <tr>
+            <td colspan="4" align='right'><h5>Shipping: {{shipment.shipping_method.name}}</h5></td>
+            <td colspan='2'>
+              <h5>{{shipment.display_discounted_cost}}</h5>
+            </td>
+          </tr>
+        {{/each}}
+
+        <tr class="adjustment">
+          <td colspan="4" align='right'><h5><%= type %>: <%= label %></h5></td>
+          <td colspan='2'>
+            <h5><%= Spree::Money.new(adjustments.sum(&:amount), :currency => @order.currency) %></h5>
+          </td>
+        </tr>
+      </tbody>
+      <tr class="cart-total">
+        <td colspan="4" align='right'><h5>Total</h5></th>
+        <td colspan><h5>{{display_total}}</h5></td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="links columns sixteen alpha omega" data-hook="cart_buttons">
+    {{input value=coupon_code size=10 placeholder='Coupon Code'}}
+    <button class='button checkout primary' id='checkout-link' {{action 'apply_coupon_code'}}>Apply Coupon</button>
+    <button class='button checkout primary' id='checkout-link' {{action 'next'}}>Next</button>
+  </div>
+</div>
