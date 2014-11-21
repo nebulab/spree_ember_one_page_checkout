@@ -1,0 +1,50 @@
+<div class="inner">
+  <p class="field">
+    <label for='firstname'>First Name</label><span class="required">*</span><br />
+    {{input value=firstname class='required'}}
+  </p>
+  <p class="field">
+    <label for='lastname'>Last Name</label><span class="required">*</span><br />
+    {{input value=lastname class='required'}}
+  </p>
+  <p class="field">
+    <label for='address1'>Address 1</label><span class="required">*</span><br />
+    {{input value=address1 class='required'}}
+  </p>
+  <p class="field">
+    <label for='address2'>Address 2</label><span class="required">*</span><br />
+    {{input value=address2 class='required'}}
+  </p>
+  <p class="field">
+    <label for='city'>City</label><span class="required">*</span><br />
+    {{input value=city class='required'}}
+  </p>
+  <p class="field">
+    <label for='country_id'>Country</label><span class="required">*</span><br />
+    <span>
+      {{view "select" content=countries selection=country
+        optionLabelPath="content.name"
+        optionValuePath="content.id"
+        prompt="Please select a Country"}}
+    </span>
+  </p>
+
+  <p class="field">
+    <label for="state">State</label><span class='required'>*</span><br/>
+    <span>
+      {{view "select" content=states selection=state_id
+        optionLabelPath="content.name"
+        optionValuePath="content.id"
+        prompt="Please select a State"}}
+    </span>
+  </p>
+
+  <p class="field">
+    <label for=zipcode>Zip Code</label><br />
+    {{input value=zipcode}}
+  </p>
+  <p class="field">
+    <label for=phone>Phone</label><br />
+    {{input value=phone}}
+  </p>
+</div>

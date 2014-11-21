@@ -1,0 +1,35 @@
+<div class="columns alpha six" data-hook="billing_fieldset_wrapper">
+  <fieldset id="billing" data-hook>
+    <form>
+      <legend align="center">Billing Address</legend>
+      {{render 'checkout/address_form' bill_address}}
+    </form>
+  </fieldset>
+</div>
+
+<div class="columns omega six" data-hook="shipping_fieldset_wrapper">
+  <fieldset id="shipping" data-hook>
+    <form>
+      <legend align="center">Shipping address</legend>
+      <p class="field checkbox" data-hook="use_billing">
+        {{input type="checkbox" name='use_billing' checked=use_billing}}
+        <label for='use_billing' id='use_billing'>Use billing address</label>
+      </p>
+      {{#unless use_billing}}
+        {{render 'checkout/address_form' ship_address}}
+      {{/unless}}
+    </form>
+  </fieldset>
+</div>
+<hr class="clear" />
+
+<div class="form-buttons" data-hook="buttons">
+  <button {{action 'updateAddresses'}}>Save</button>
+  {{#if user_id}}
+    <span data-hook="save_user_address">
+      &nbsp; &nbsp;
+      <%= check_box_tag 'save_user_address', '1', try_spree_current_user.respond_to?(:persist_order_address) %>
+      <%= label_tag :save_user_address, Spree.t(:save_my_address) %>
+    </span>
+  {{/if}}
+</div>

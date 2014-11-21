@@ -1,0 +1,17 @@
+<form id='update-cart'>
+  {{#each message in errors.messages}}
+    {{message}}
+  {{/each}}
+
+  <div data-hook="inside_cart_form">
+    {{partial 'checkout/cart'}}
+  </div>
+
+  <div id="checkout" data-hook>
+      {{partial 'checkout/address'}}
+
+      {{render 'checkout/delivery' shipments}}
+
+      {{render 'checkout/payment'}}
+    </div>
+</form>

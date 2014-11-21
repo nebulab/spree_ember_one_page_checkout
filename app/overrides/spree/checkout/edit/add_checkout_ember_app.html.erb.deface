@@ -1,4 +1,4 @@
-<!-- replace "[data-hook='outside_cart_form']" -->
+<!-- replace "#checkout[data-hook]" -->
 
 <script>
   Spree.current_order_id = "<%= @order.number %>"
