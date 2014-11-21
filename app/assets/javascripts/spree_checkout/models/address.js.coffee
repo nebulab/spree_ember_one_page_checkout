@@ -10,5 +10,11 @@ SpreeCheckout.Address = DS.Model.extend
   phone: DS.attr('string')
   zipcode: DS.attr('string')
 
+  country_id: DS.attr('number')
+
   order: DS.belongsTo('order')
   country: DS.belongsTo('country')
+
+  countryDidChange: ( ->
+    @set('country_id', @get('country.id'))
+  ).observes('country')

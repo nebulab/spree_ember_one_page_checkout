@@ -1,7 +1,6 @@
 # for more details see: http://emberjs.com/guides/views/
 
 SpreeCheckout.ShipmentRatesView = Ember.CollectionView.extend
-  templateName: 'checkout/shipment_rates'
   tagName: 'ul'
 
   deselectAll: ->
@@ -10,7 +9,7 @@ SpreeCheckout.ShipmentRatesView = Ember.CollectionView.extend
 
   itemViewClass: Ember.View.extend
     classNames: ['shipping-method']
-    templateName: 'checkout/shipment-rate'
+    templateName: 'checkout/shipment_rate'
 
     contextBinding: 'content'
 
