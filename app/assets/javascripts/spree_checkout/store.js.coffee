@@ -28,6 +28,19 @@ SpreeCheckout.ApplicationAdapter = DS.ActiveModelAdapter.extend
   next: (order) ->
     @ajax("/api/checkouts/#{order.get('number')}/next", 'PUT')
 
+  updatePayment: (order) ->
+    data = { order: { payments_attributes: [{ payment_method_id: order.get('payment_method_id') }] }}
+    if order.get('store').getById('payment-method', order.get('payment_method_id')).isGateway
+      data['payment_source'][order.get('payment_method_id')] =  {
+        number: order.get('payment_source.number'),
+        month: order.get('payment_source.month'),
+        year: order.get('payment_source.year'),
+        verification_value: order.get('payment_source.verification_value'),
+        name: order.get('payment_source.name')
+      }
+    console.log(data)
+    @ajax("/api/checkouts/#{order.get('number')}", 'PUT', { data: data })
+
   selectShippingRate: (order) ->
     data = { order: { shipments_attributes: {} }}
     order.get('shipments').forEach (shipment, index) =>

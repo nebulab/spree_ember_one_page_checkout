@@ -3,6 +3,7 @@
 SpreeCheckout.Order = DS.Model.extend
   coupon_code: null
   use_billing: false
+  payment_method_id: null
 
   number: DS.attr('string')
   item_total: DS.attr('number')
@@ -16,9 +17,12 @@ SpreeCheckout.Order = DS.Model.extend
   user_id: DS.attr('number')
 
   ship_address: DS.belongsTo('ship-address')
+  payment_source: DS.belongsTo('payment-source')
   bill_address: DS.belongsTo('bill-address')
   line_items: DS.hasMany('line-item')
   shipments: DS.hasMany('shipments')
+  payment_methods: DS.hasMany('payment-method')
+
 
   applyCouponCode: ->
     @set('coupon_code', null)
@@ -31,6 +35,13 @@ SpreeCheckout.Order = DS.Model.extend
 
   updateAddresses: ->
     @store.adapterFor(@constructor.typeKey).updateAddresses(@).then ( (success) =>
+      @reload()
+    ), (errors) =>
+      console.log(errors)
+      @adapterDidInvalidate(errors)
+
+  updatePayment: ->
+    @store.adapterFor(@constructor.typeKey).updatePayment(@).then ( (success) =>
       @reload()
     ), (errors) =>
       console.log(errors)

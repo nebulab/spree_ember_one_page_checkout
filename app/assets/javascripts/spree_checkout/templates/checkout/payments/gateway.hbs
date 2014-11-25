@@ -1,0 +1,34 @@
+<image src='credit_cards/credit_card.gif' id='credit-card-image' />
+
+<p class="field">
+  <label for='name_on_card'><%= Spree.t(:name_on_card) %></label><span class="required">*</span><br />
+  {{input value=name name='name_on_card' class='required'}}
+</p>
+
+<p class="field" data-hook="card_number">
+  <label for='card_number'><%= Spree.t(:card_number) %></label><span class="required">*</span><br />
+  {{input value=number name='number' class='required cardNumber' id='card_number' size='19' maxlength='19' autocomplete='off'}}
+  &nbsp;
+  <span id="card_type" style="display:none;">
+    ( <span id="looks_like" ><%= Spree.t(:card_type_is) %> <span id="type"></span></span>
+      <span id="unrecognized"><%= Spree.t(:unrecognized_card_type) %></span>
+    )
+  </span>
+</p>
+
+<p class="field" data-hook="card_expiration">
+  <label for='card_expiry'><%= Spree.t(:expiration) %></label><span class="required">*</span><br />
+  {{input value=expiry name='expiry' class='required cardExpiry' id='card_expiry' placeholder='MM / YY'}}
+</p>
+
+<p class="field" data-hook="card_expiration">
+  Mese/anno
+  {{input value=month name='month'}}
+  {{input value=year name='year'}}
+</p>
+
+<p class="field" data-hook="card_code">
+  <label for='card_code'><%= Spree.t(:card_code) %></label><span class="required">*</span><br />
+  {{input value=verification_value name='verification_value' class='required cardCode' id='card_code' size='5'}}
+  <%= link_to "(#{Spree.t(:what_is_this)})", spree.content_path('cvv'), :target => '_blank', "data-hook" => "cvv_link", :id => "cvv_link" %>
+</p>

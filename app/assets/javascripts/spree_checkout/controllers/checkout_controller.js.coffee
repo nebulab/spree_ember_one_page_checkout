@@ -18,6 +18,10 @@ SpreeCheckout.CheckoutController = Ember.ObjectController.extend
     @get('model.state') == 'payment'
   ).property('model.state')
 
+  transitionTo: (state) ->
+    @transitionToRoute("checkout.#{state}")
+
+  checkQuantity: ->
     if @get('model.total_quantity') <= 0
       window.location.replace('/cart')
 
@@ -38,11 +42,17 @@ SpreeCheckout.CheckoutController = Ember.ObjectController.extend
         @reloadCart()
 
     updateAddresses: ->
-      @get('model').updateAddresses()
+      @get('model').updateAddresses().then =>
+        @transitionTo(@get('model.state'))
+
+    updatePayment: ->
+      @get('model').updatePayment().then =>
+        @transitionTo(@get('model.state'))
 
     selectShippingRate: ->
-      @get('model').selectShippingRate()
+      @get('model').selectShippingRate().then =>
+        @transitionTo(@get('model.state'))
 
     next: ->
-      @get('model').next =>
-        @transitionToRoute("checkout.#{@get('state')}")
+      @get('model').next().then =>
+        @transitionTo(@get('model.state'))
