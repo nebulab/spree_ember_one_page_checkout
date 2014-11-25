@@ -3,15 +3,25 @@
     {{message}}
   {{/each}}
 
-  <div data-hook="inside_cart_form">
-    {{partial 'checkout/cart'}}
-  </div>
+  {{#checkout-step isEnabled=isCart}}
+    <div data-hook="inside_cart_form">
+      {{partial 'checkout/cart'}}
+    </div>
+  {{/checkout-step}}
+
+  <div class='clear'></div>
 
   <div id="checkout" data-hook>
+    {{#checkout-step isEnabled=isAddress}}
       {{partial 'checkout/address'}}
+    {{/checkout-step}}
 
+    {{#checkout-step isEnabled=isDelivery}}
       {{render 'checkout/delivery' shipments}}
+    {{/checkout-step}}
 
+    {{#checkout-step isEnabled=isPayment}}
       {{render 'checkout/payment'}}
-    </div>
+    {{/checkout-step}}
+  </div>
 </form>

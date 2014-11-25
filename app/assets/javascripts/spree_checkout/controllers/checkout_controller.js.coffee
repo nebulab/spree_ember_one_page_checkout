@@ -2,7 +2,22 @@
 
 SpreeCheckout.CheckoutController = Ember.ObjectController.extend
 
-  checkQuantity: ->
+  isCart: ( ->
+    @get('model.state') == 'cart'
+  ).property('model.state')
+
+  isAddress: ( ->
+    @get('model.state') == 'address'
+  ).property('model.state')
+
+  isDelivery: ( ->
+    @get('model.state') == 'delivery'
+  ).property('model.state')
+
+  isPayment: ( ->
+    @get('model.state') == 'payment'
+  ).property('model.state')
+
     if @get('model.total_quantity') <= 0
       window.location.replace('/cart')
 
