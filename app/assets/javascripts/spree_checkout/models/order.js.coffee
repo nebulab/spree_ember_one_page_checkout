@@ -27,8 +27,10 @@ SpreeCheckout.Order = DS.Model.extend
   applyCouponCode: ->
     @set('coupon_code', null)
     @store.adapterFor(@constructor.typeKey).applyCouponCode(@).then ( =>
+      @set('coupon_code', null)
       @reload()
     ), ( (errors) =>
+      @set('coupon_code', null)
       @transitionTo('loaded.updated.uncommitted')
       @get('errors').add('coupon_code', error.message)
     )
