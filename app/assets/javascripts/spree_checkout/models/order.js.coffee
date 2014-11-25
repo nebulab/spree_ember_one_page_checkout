@@ -11,6 +11,7 @@ SpreeCheckout.Order = DS.Model.extend
   total: DS.attr('number')
   total_quantity: DS.attr('number')
   display_total: DS.attr('string')
+  display_tax_total: DS.attr('string')
   ship_total: DS.attr('number')
   adjustment_total: DS.attr('number')
   state: DS.attr('string')
@@ -22,10 +23,30 @@ SpreeCheckout.Order = DS.Model.extend
   line_items: DS.hasMany('line-item')
   shipments: DS.hasMany('shipments')
   payment_methods: DS.hasMany('payment-method')
+  adjustments: DS.hasMany('adjustment')
 
+  lineItemsAdjustments: ( ->
+    result = []
+    adjustments = null
+    @get('line_items').forEach (line_item) ->
+      adjustments = line_item.get('adjustments').filterBy('eligible')
+    adjustments.forEach (adjustment) ->
+      label = adjustment.get('label')
+      found = result.findBy('label', label)
+      if(!found)
+        result.pushObject(Ember.Object.create({label: label, adjustments: []}))
+      result.findBy('label', label).get('adjustments').pushObject(adjustment);
+    result
+  ).property('line_items.@each.adjustments.@each.eligible')
+
+  selectedShipments: ( ->
+    result = []
+    @get('shipments').forEach (shipment) ->
+      result.pushObject(shipment.get('shipping_rates').findBy('selected'))
+    result
+  ).property('shipments.@each.selected_shipping_rate_id')
 
   applyCouponCode: ->
-    @set('coupon_code', null)
     @store.adapterFor(@constructor.typeKey).applyCouponCode(@).then ( =>
       @set('coupon_code', null)
       @reload()

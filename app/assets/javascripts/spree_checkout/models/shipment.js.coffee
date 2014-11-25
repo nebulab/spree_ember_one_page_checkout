@@ -5,3 +5,7 @@ SpreeCheckout.Shipment = DS.Model.extend
 
   order: DS.belongsTo('order')
   shipping_rates: DS.hasMany('shipping-rate')
+
+  selectedShippingRate: ( ->
+    @get('shipping_rates').findBy('id', selected_shipping_rate_id)
+  ).property('selected_shipping_rate_id')

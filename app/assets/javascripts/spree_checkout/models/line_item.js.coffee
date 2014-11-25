@@ -10,3 +10,4 @@ SpreeCheckout.LineItem = DS.Model.extend
 
   order: DS.belongsTo('order')
   variant: DS.belongsTo('variant')
+  adjustments: DS.hasMany('adjustment')
