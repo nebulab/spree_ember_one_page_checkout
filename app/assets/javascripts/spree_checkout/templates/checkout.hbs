@@ -4,6 +4,7 @@
   {{/each}}
 
   {{#checkout-step isEnabled=isCart}}
+    <button {{action 'goToState' 'cart'}}>Edit</button>
     <div data-hook="inside_cart_form">
       {{partial 'checkout/cart'}}
     </div>
@@ -13,15 +14,23 @@
 
   <div id="checkout" data-hook>
     {{#checkout-step isEnabled=isAddress}}
+      <button {{action 'goToState' 'address'}}>Edit</button>
       {{partial 'checkout/address'}}
     {{/checkout-step}}
 
     {{#checkout-step isEnabled=isDelivery}}
+      <button {{action 'goToState' 'delivery'}}>Edit</button>
       {{render 'checkout/delivery' shipments}}
     {{/checkout-step}}
 
     {{#checkout-step isEnabled=isPayment}}
-      {{render 'checkout/payment'}}
+      <button {{action 'goToState' 'payment'}}>Edit</button>
+      {{partial 'checkout/payment'}}
+    {{/checkout-step}}
+
+    {{#checkout-step isEnabled=isConfirm}}
+      <button {{action 'goToState' 'confirm'}}>Edit</button>
+      {{render 'checkout/confirm'}}
     {{/checkout-step}}
   </div>
 </form>

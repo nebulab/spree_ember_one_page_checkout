@@ -4,3 +4,7 @@
     {{view 'shipment-rates' content=shipment.shipping_rates}}
   {{/each}}
 </ul>
+
+<div class="form-buttons" data-hook="buttons">
+  <button {{action 'selectShippingRate'}}>Save</button>
+</div>

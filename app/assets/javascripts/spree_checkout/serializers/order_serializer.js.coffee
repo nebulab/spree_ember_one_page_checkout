@@ -12,6 +12,7 @@ SpreeCheckout.OrderSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecor
     ship_address: { embedded: 'always' }
     bill_address: { embedded: 'always' }
     shipments: { embedded: 'always' }
+    payments: { embedded: 'always' }
     payment_methods: { embedded: 'always' }
   }
 )

@@ -18,8 +18,15 @@ SpreeCheckout.CheckoutController = Ember.ObjectController.extend
     @get('model.state') == 'payment'
   ).property('model.state')
 
+  isConfirm: ( ->
+    @get('model.state') == 'confirm'
+  ).property('model.state')
+
   transitionTo: (state) ->
-    @transitionToRoute("checkout.#{state}")
+    if state == 'complete'
+      window.location.replace("/orders/#{@get('model.number')}")
+    else
+      @transitionToRoute("checkout.#{state}")
 
   checkQuantity: ->
     if @get('model.total_quantity') <= 0
@@ -30,6 +37,10 @@ SpreeCheckout.CheckoutController = Ember.ObjectController.extend
       @checkQuantity()
 
   actions:
+    goToState: (state) ->
+      @get('model').goToState(state).then =>
+        @transitionTo(@get('model.state'))
+
     apply_coupon_code: ->
       @get('model').applyCouponCode()
 
@@ -51,6 +62,10 @@ SpreeCheckout.CheckoutController = Ember.ObjectController.extend
 
     selectShippingRate: ->
       @get('model').selectShippingRate().then =>
+        @transitionTo(@get('model.state'))
+
+    confirm: ->
+      @get('model').confirm().then =>
         @transitionTo(@get('model.state'))
 
     next: ->

@@ -1,0 +1,2 @@
+SpreeCheckout.Payment = DS.Model.extend
+  payment_method_id: DS.attr('number')

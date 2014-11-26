@@ -16,4 +16,3 @@ SpreeCheckout.ShipmentRatesView = Ember.CollectionView.extend
     click: ->
       @get('parentView').deselectAll()
       @set('content.selected', true)
-      @get('controller').send('selectShippingRate')

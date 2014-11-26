@@ -21,14 +21,7 @@
   {{input value=expiry name='expiry' class='required cardExpiry' id='card_expiry' placeholder='MM / YY'}}
 </p>
 
-<p class="field" data-hook="card_expiration">
-  Mese/anno
-  {{input value=month name='month'}}
-  {{input value=year name='year'}}
-</p>
-
 <p class="field" data-hook="card_code">
   <label for='card_code'><%= Spree.t(:card_code) %></label><span class="required">*</span><br />
   {{input value=verification_value name='verification_value' class='required cardCode' id='card_code' size='5'}}
-  <%= link_to "(#{Spree.t(:what_is_this)})", spree.content_path('cvv'), :target => '_blank', "data-hook" => "cvv_link", :id => "cvv_link" %>
 </p>
