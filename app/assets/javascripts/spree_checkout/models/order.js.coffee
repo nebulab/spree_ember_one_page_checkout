@@ -2,7 +2,7 @@
 
 SpreeCheckout.Order = DS.Model.extend
   coupon_code: null
-  use_billing: false
+  use_billing: true
   payment_method_id: null
 
   number: DS.attr('string')
@@ -21,7 +21,8 @@ SpreeCheckout.Order = DS.Model.extend
   payment_source: DS.belongsTo('payment-source')
   bill_address: DS.belongsTo('bill-address')
   line_items: DS.hasMany('line-item')
-  shipments: DS.hasMany('shipments')
+  shipments: DS.hasMany('shipment')
+  payments: DS.hasMany('payment')
   payment_methods: DS.hasMany('payment-method')
   adjustments: DS.hasMany('adjustment')
 
@@ -57,29 +58,19 @@ SpreeCheckout.Order = DS.Model.extend
     )
 
   updateAddresses: ->
-    @store.adapterFor(@constructor.typeKey).updateAddresses(@).then ( (success) =>
-      @reload()
-    ), (errors) =>
-      console.log(errors)
-      @adapterDidInvalidate(errors)
+    @store.adapterFor(@constructor).updateAddresses(@)
 
   updatePayment: ->
-    @store.adapterFor(@constructor.typeKey).updatePayment(@).then ( (success) =>
-      @reload()
-    ), (errors) =>
-      console.log(errors)
-      @adapterDidInvalidate(errors)
+    @store.adapterFor(@constructor).updatePayment(@)
 
   next: ->
-    @store.adapterFor(@constructor.typeKey).next(@).then ( (success) =>
-      @reload()
-    ), (errors) =>
-      console.log(errors)
-      @adapterDidInvalidate(errors)
+    @store.adapterFor(@constructor).next(@)
+
+  confirm: ->
+    @store.adapterFor(@constructor).confirm(@)
 
   selectShippingRate: ->
-    @store.adapterFor(@constructor.typeKey).selectShippingRate(@).then ( (success) =>
-      @reload()
-    ), (errors) =>
-      console.log(errors)
-      @adapterDidInvalidate(errors)
+    @store.adapterFor(@constructor).selectShippingRate(@)
+
+  goToState: (state) ->
+    @store.adapterFor(@constructor).goToState(@, state)
