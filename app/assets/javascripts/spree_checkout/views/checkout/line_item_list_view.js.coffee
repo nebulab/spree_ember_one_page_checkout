@@ -13,8 +13,8 @@ SpreeCheckout.LineItemListView = Ember.CollectionView.extend
 
     quantitySelect: Ember.Select.extend
       change: (event) ->
-        @get('controller').send('update_line_item', @get('parentView.content'))
+        @get('controller').send('updateLineItem', @get('parentView.content'))
 
     removeView: Ember.View.extend
       click: (event) ->
-        @get('controller').send('destroy_line_item', @get('parentView.content'))
+        @get('controller').send('destroyLineItem', @get('parentView.content'))

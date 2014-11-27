@@ -8,3 +8,6 @@ SpreeCheckout.CheckoutAddressRoute = Ember.Route.extend
       order.set('ship_address', @store.createRecord('ship-address'))
     if Ember.isEmpty(order.get('bill_address'))
       order.set('bill_address', @store.createRecord('bill-address'))
+
+  renderTemplate: ->
+    @render({ outlet: 'address' })

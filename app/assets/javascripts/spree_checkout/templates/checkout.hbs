@@ -3,8 +3,8 @@
     {{message}}
   {{/each}}
 
-  {{#checkout-step isEnabled=isCart}}
-    <button {{action 'goToState' 'cart'}}>Edit</button>
+  {{outlet 'cart'}}
+  {{#checkout-step order=content step='cart' goToState="goToState"}}
     <div data-hook="inside_cart_form">
       {{partial 'checkout/cart'}}
     </div>
@@ -13,24 +13,24 @@
   <div class='clear'></div>
 
   <div id="checkout" data-hook>
-    {{#checkout-step isEnabled=isAddress}}
-      <button {{action 'goToState' 'address'}}>Edit</button>
-      {{partial 'checkout/address'}}
+    {{outlet 'address'}}
+    {{#checkout-step order=content step='address' goToState="goToState"}}
+      {{partial "checkout/address"}}
     {{/checkout-step}}
 
-    {{#checkout-step isEnabled=isDelivery}}
-      <button {{action 'goToState' 'delivery'}}>Edit</button>
-      {{render 'checkout/delivery' shipments}}
+    {{outlet 'delivery'}}
+    {{#checkout-step order=content step='delivery' goToState="goToState"}}
+      {{partial "checkout/delivery"}}
     {{/checkout-step}}
 
-    {{#checkout-step isEnabled=isPayment}}
-      <button {{action 'goToState' 'payment'}}>Edit</button>
-      {{partial 'checkout/payment'}}
+    {{outlet 'payment'}}
+    {{#checkout-step order=content step='payment' goToState="goToState"}}
+      {{partial "checkout/payment"}}
     {{/checkout-step}}
 
-    {{#checkout-step isEnabled=isConfirm}}
-      <button {{action 'goToState' 'confirm'}}>Edit</button>
-      {{render 'checkout/confirm'}}
+    {{outlet 'confirm'}}
+    {{#checkout-step order=content step='confirm' goToState="goToState"}}
+      {{partial "checkout/confirm"}}
     {{/checkout-step}}
   </div>
 </form>

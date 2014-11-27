@@ -6,3 +6,5 @@ SpreeCheckout.Adjustment = DS.Model.extend
   eligible: DS.attr('boolean')
   label: DS.attr('string')
   adjustable_type: DS.attr('string')
+
+  order: DS.belongsTo('order')
