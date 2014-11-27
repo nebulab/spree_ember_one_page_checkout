@@ -15,7 +15,9 @@ SpreeCheckout.Order = DS.Model.extend
   ship_total: DS.attr('number')
   adjustment_total: DS.attr('number')
   state: DS.attr('string')
+  checkout_steps: DS.attr()
   user_id: DS.attr('number')
+  email: DS.attr('string')
 
   ship_address: DS.belongsTo('ship-address')
   payment_source: DS.belongsTo('payment-source')
@@ -31,12 +33,12 @@ SpreeCheckout.Order = DS.Model.extend
     adjustments = null
     @get('line_items').forEach (line_item) ->
       adjustments = line_item.get('adjustments').filterBy('eligible')
-    adjustments.forEach (adjustment) ->
-      label = adjustment.get('label')
-      found = result.findBy('label', label)
-      if(!found)
-        result.pushObject(Ember.Object.create({label: label, adjustments: []}))
-      result.findBy('label', label).get('adjustments').pushObject(adjustment);
+      adjustments.forEach (adjustment) ->
+        label = adjustment.get('label')
+        found = result.findBy('label', label)
+        if(!found)
+          result.pushObject(Ember.Object.create({label: label, adjustments: []}))
+        result.findBy('label', label).get('adjustments').pushObject(adjustment);
     result
   ).property('line_items.@each.adjustments.@each.eligible')
 
@@ -46,31 +48,3 @@ SpreeCheckout.Order = DS.Model.extend
       result.pushObject(shipment.get('shipping_rates').findBy('selected'))
     result
   ).property('shipments.@each.selected_shipping_rate_id')
-
-  applyCouponCode: ->
-    @store.adapterFor(@constructor.typeKey).applyCouponCode(@).then ( =>
-      @set('coupon_code', null)
-      @reload()
-    ), ( (errors) =>
-      @set('coupon_code', null)
-      @transitionTo('loaded.updated.uncommitted')
-      @get('errors').add('coupon_code', error.message)
-    )
-
-  updateAddresses: ->
-    @store.adapterFor(@constructor).updateAddresses(@)
-
-  updatePayment: ->
-    @store.adapterFor(@constructor).updatePayment(@)
-
-  next: ->
-    @store.adapterFor(@constructor).next(@)
-
-  confirm: ->
-    @store.adapterFor(@constructor).confirm(@)
-
-  selectShippingRate: ->
-    @store.adapterFor(@constructor).selectShippingRate(@)
-
-  goToState: (state) ->
-    @store.adapterFor(@constructor).goToState(@, state)
