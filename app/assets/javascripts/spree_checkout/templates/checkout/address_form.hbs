@@ -32,7 +32,7 @@
   <p class="field">
     <label for="state">State</label><span class='required'>*</span><br/>
     <span>
-      {{view "select" content=states selection=state_id
+      {{view "select" content=states selection=state
         optionLabelPath="content.name"
         optionValuePath="content.id"
         prompt="Please select a State"}}
