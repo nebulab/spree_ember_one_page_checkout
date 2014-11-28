@@ -16,5 +16,19 @@ window.SpreeCheckout = Ember.Application.create
 
   Resolver: Ember.DefaultResolver.extend
     resolveTemplate: (parsedName) ->
-      parsedName.fullNameWithoutType = "spree_checkout/#{parsedName.fullNameWithoutType}"
+      parsedName.fullNameWithoutType = @fullName(parsedName.fullNameWithoutType)
       @_super(parsedName)
+
+    fullName: (fullNameWithoutType) ->
+      if Ember.TEMPLATES.hasOwnProperty(@overridePath(fullNameWithoutType))
+        @overridePath(fullNameWithoutType)
+      else
+        @defaultPath(fullNameWithoutType)
+
+    overridePath: (fullNameWithoutType) ->
+      "spree_checkout/overrides/#{fullNameWithoutType}"
+
+    defaultPath: (fullNameWithoutType) ->
+      "spree_checkout/#{fullNameWithoutType}"
+
+
