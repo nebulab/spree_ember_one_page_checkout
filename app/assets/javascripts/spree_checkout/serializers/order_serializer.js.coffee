@@ -17,14 +17,11 @@ SpreeCheckout.OrderSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecor
     @_super store, primaryType, payload, recordId
 
   serialize: (order, options) ->
-    if order.get('goToState')
-      json = {}
-    else
-      switch order.get('state')
-        when 'address' then @serializeAddresses(order)
-        when 'delivery' then @serializeShippingRate(order)
-        when 'payment' then @serializePayment(order)
-        else @_super(order, options)
+    switch order.get('state')
+      when 'address' then @serializeAddresses(order)
+      when 'delivery' then @serializeShippingRate(order)
+      when 'payment' then @serializePayment(order)
+      else @_super(order, options)
 
   serializeAddresses: (order) ->
     json = { bill_address_attributes: @serialize(order.get('bill_address'), { includeId: true }) }
@@ -38,8 +35,8 @@ SpreeCheckout.OrderSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecor
     json = { shipments_attributes: {} }
     order.get('shipments').forEach (shipment, index) =>
       json['shipments_attributes'][index] = {
-        id: shipment.id,
-        selected_shipping_rate_id: shipment.get('shipping_rates').findBy('selected', true).get('id')
+        id: shipment.get('id'),
+        selected_shipping_rate_id: shipment.get('selectedShippingRate.id')
       }
     json
 

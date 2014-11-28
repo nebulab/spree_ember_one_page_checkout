@@ -34,11 +34,11 @@
         </td>
       </tr>
 
-      {{#each shipment in selectedShipments}}
+      {{#each shipment in shipments}}
         <tr>
-          <td colspan="4" align='right'><h5>Shipping: {{shipment.name}}</h5></td>
+          <td colspan="4" align='right'><h5>Shipping: {{shipment.selectedShippingRate.name}}</h5></td>
           <td colspan='2'>
-            <h5>{{shipment.display_cost}}</h5>
+            <h5>{{shipment.selectedShippingRate.display_cost}}</h5>
           </td>
         </tr>
       {{/each}}
