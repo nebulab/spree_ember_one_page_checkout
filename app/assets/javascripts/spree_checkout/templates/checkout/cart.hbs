@@ -22,7 +22,7 @@
         <tr class="adjustment">
           <td colspan="4" align='right'><h5>Promotion: {{adjustment.label}}</h5></td>
           <td colspan='2'>
-            <h5>{{adjustment.display_amount}}</h5>
+            <h5>{{money adjustment.amount}}</h5>
           </td>
         </tr>
       {{/each}}
@@ -43,7 +43,7 @@
         </tr>
       {{/each}}
 
-      {{#each adjustment in adjustments}}
+      {{#each adjustment in eligibleAdjustments}}
         <tr class="adjustment">
           <td colspan="4" align='right'><h5>Adjustment: {{adjustment.label}}</h5></td>
           <td colspan='2'>

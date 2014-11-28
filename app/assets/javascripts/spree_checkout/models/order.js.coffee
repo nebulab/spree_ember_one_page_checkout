@@ -32,19 +32,25 @@ SpreeCheckout.Order = DS.Model.extend
     result = []
     adjustments = null
     @get('line_items').forEach (line_item) ->
-      adjustments = line_item.get('adjustments').filterBy('eligible')
+      adjustments = line_item.get('eligibleAdjustments')
       adjustments.forEach (adjustment) ->
         label = adjustment.get('label')
         found = result.findBy('label', label)
         if(!found)
-          result.pushObject(Ember.Object.create({label: label, adjustments: []}))
-        result.findBy('label', label).get('adjustments').pushObject(adjustment);
+          LineItemAdjustment = Ember.Object.extend
+            amount: ( ->
+              @get('adjustments').reduce(( (previousValue, adjustment) ->
+                previousValue + adjustment.get('amount')
+              ), 0)
+            ).property('adjustments')
+          lineItemsAdjustment = LineItemAdjustment.create
+            label: label,
+            adjustments: [],
+          result.pushObject(lineItemsAdjustment)
+        result.findBy('label', label).get('adjustments').pushObject(adjustment)
     result
-  ).property('line_items.@each.adjustments.@each.eligible')
+  ).property('line_items.@each.eligibleAdjustments')
 
-  selectedShipments: ( ->
-    result = []
-    @get('shipments').forEach (shipment) ->
-      result.pushObject(shipment.get('shipping_rates').findBy('selected'))
-    result
-  ).property('shipments.@each.selected_shipping_rate_id')
+  eligibleAdjustments: ( ->
+    @get('adjustments').filterBy('eligible')
+  ).property('adjustments')
