@@ -49,7 +49,7 @@ SpreeCheckout.OrderSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecor
         expiry: order.get('payment_source.expiry')
         verification_value: order.get('payment_source.verification_value')
         name: order.get('payment_source.name')
-        cc_type: 'visa'
+        cc_type: order.get('payment_source.cc_type')
       }
     json
 )

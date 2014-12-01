@@ -1,5 +1,9 @@
-SpreeCheckout.PaymentSource = DS.Model.extend
-  name: DS.attr('string')
-  card_number: DS.attr('string')
-  expiry: DS.attr('string')
-  card_code: DS.attr('string')
+SpreeCheckout.PaymentSource = Ember.Object.extend
+  name: null
+  number: null
+  expiry: null
+  cardCode: null
+
+  ccType: ( ->
+    Ember.$.payment.cardType(@get('number'))
+  ).property('number')

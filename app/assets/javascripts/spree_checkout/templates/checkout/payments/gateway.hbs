@@ -1,27 +1,24 @@
-<image src='credit_cards/credit_card.gif' id='credit-card-image' />
+<image src='/assets/credit_cards/credit_card.gif' id='credit-card-image' />
 
-<p class="field">
-  <label for='name_on_card'><%= Spree.t(:name_on_card) %></label><span class="required">*</span><br />
-  {{input value=name name='name_on_card' class='required'}}
-</p>
+{{#credit-card}}
+  <p class="field">
+    <label for='name_on_card'>Name on Card</label><span class="required">*</span><br />
+    {{input value=payment_source.name name='name_on_card' class='required'}}
+  </p>
 
-<p class="field" data-hook="card_number">
-  <label for='card_number'><%= Spree.t(:card_number) %></label><span class="required">*</span><br />
-  {{input value=number name='number' class='required cardNumber' id='card_number' size='19' maxlength='19' autocomplete='off'}}
-  &nbsp;
-  <span id="card_type" style="display:none;">
-    ( <span id="looks_like" ><%= Spree.t(:card_type_is) %> <span id="type"></span></span>
-      <span id="unrecognized"><%= Spree.t(:unrecognized_card_type) %></span>
-    )
-  </span>
-</p>
+  <p class="field" data-hook="card_number">
+    <label for='card_number'>Card Number</label><span class="required">*</span><br />
+    {{credit-card-number value=payment_source.number class='required'}}
+    {{credit-card-type value=payment_source.ccType class='required'}}
+  </p>
 
-<p class="field" data-hook="card_expiration">
-  <label for='card_expiry'><%= Spree.t(:expiration) %></label><span class="required">*</span><br />
-  {{input value=expiry name='expiry' class='required cardExpiry' id='card_expiry' placeholder='MM / YY'}}
-</p>
+  <p class="field" data-hook="card_expiration">
+    <label for='card_expiry'>Expiration</label><span class="required">*</span><br />
+    {{credit-card-expiry value=payment_source.expiry class='required' placeholder='MM / YYYY'}}
+  </p>
 
-<p class="field" data-hook="card_code">
-  <label for='card_code'><%= Spree.t(:card_code) %></label><span class="required">*</span><br />
-  {{input value=verification_value name='verification_value' class='required cardCode' id='card_code' size='5'}}
-</p>
+  <p class="field" data-hook="card_code">
+    <label for='card_code'>Card Code</label><span class="required">*</span><br />
+    {{credit-card-cvc value=payment_source.cardCode class='required' size='5'}}
+  </p>
+{{/credit-card}}

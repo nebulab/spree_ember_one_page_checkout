@@ -1,5 +1,5 @@
 <fieldset id="payment" data-hook>
-  <legend align="center"><%= Spree.t(:payment_information) %></legend>
+  <legend align="center">Payment</legend>
   <div data-hook="checkout_payment_step">
 
     <div id="payment-method-fields" data-hook>
@@ -19,10 +19,10 @@
           <li id="payment_method_" class="<%= 'last' if method == @order.available_payment_methods.last %>" data-hook>
             <fieldset>
               {{#if payment_method.isGateway}}
-                {{render "checkout/payments/gateway" payment_source}}
+                {{partial "checkout/payments/gateway"}}
               {{/if}}
               {{#if payment_method.isCheck}}
-                {{render "checkout/payments/check"}}
+                {{partial "checkout/payments/check"}}
               {{/if}}
             </fieldset>
           </li>
