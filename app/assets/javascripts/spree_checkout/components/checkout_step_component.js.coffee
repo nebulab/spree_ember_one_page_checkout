@@ -14,6 +14,11 @@ SpreeCheckout.CheckoutStepComponent = Ember.Component.extend
     @get('order.state') == @get('step')
   ).property('order.state')
 
+  showEdit: ( ->
+    checkout_steps = @get('order.checkout_steps')
+    checkout_steps.indexOf(@get('step')) < checkout_steps.indexOf(@get('order.state'))
+  ).property('order.state')
+
   actions:
     goToState: (step) ->
       @sendAction('goToState', step)

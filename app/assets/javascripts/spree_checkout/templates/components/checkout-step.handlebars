@@ -1,4 +1,6 @@
 {{#unless isEnabled}}
-  <button {{action 'goToState' step}}>Edit</button>
+  {{#if showEdit}}
+    <button {{action 'goToState' step}}>Edit</button>
+  {{/if}}
   {{yield}}
 {{/unless}}
