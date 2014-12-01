@@ -13,24 +13,32 @@
   <div class='clear'></div>
 
   <div id="checkout" data-hook>
-    {{outlet 'address'}}
-    {{#checkout-step order=content step='address' goToState="goToState"}}
-      {{partial "checkout/address"}}
-    {{/checkout-step}}
+    {{#if hasAddress}}
+      {{outlet 'address'}}
+      {{#checkout-step order=content step='address' goToState="goToState"}}
+        {{partial "checkout/address"}}
+      {{/checkout-step}}
+    {{/if}}
 
-    {{outlet 'delivery'}}
-    {{#checkout-step order=content step='delivery' goToState="goToState"}}
-      {{partial "checkout/delivery"}}
-    {{/checkout-step}}
+    {{#if hasDelivery}}
+      {{outlet 'delivery'}}
+      {{#checkout-step order=content step='delivery' goToState="goToState"}}
+        {{partial "checkout/delivery"}}
+      {{/checkout-step}}
+    {{/if}}
 
-    {{outlet 'payment'}}
-    {{#checkout-step order=content step='payment' goToState="goToState"}}
-      {{partial "checkout/payment"}}
-    {{/checkout-step}}
+    {{#if hasPayment}}
+      {{outlet 'payment'}}
+      {{#checkout-step order=content step='payment' goToState="goToState"}}
+        {{partial "checkout/payment"}}
+      {{/checkout-step}}
+    {{/if}}
 
-    {{outlet 'confirm'}}
-    {{#checkout-step order=content step='confirm' goToState="goToState"}}
-      {{partial "checkout/confirm"}}
-    {{/checkout-step}}
+    {{#if hasConfirm}}
+      {{outlet 'confirm'}}
+      {{#checkout-step order=content step='confirm' goToState="goToState"}}
+        {{partial "checkout/confirm"}}
+      {{/checkout-step}}
+    {{/if}}
   </div>
 </form>

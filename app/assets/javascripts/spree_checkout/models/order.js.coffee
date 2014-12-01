@@ -4,6 +4,7 @@ SpreeCheckout.Order = DS.Model.extend
   coupon_code: null
   use_billing: true
   payment_method_id: null
+  payment_source: null
 
   number: DS.attr('string')
   item_total: DS.attr('number')
@@ -20,13 +21,16 @@ SpreeCheckout.Order = DS.Model.extend
   email: DS.attr('string')
 
   ship_address: DS.belongsTo('ship-address')
-  payment_source: DS.belongsTo('payment-source')
   bill_address: DS.belongsTo('bill-address')
   line_items: DS.hasMany('line-item')
   shipments: DS.hasMany('shipment')
   payments: DS.hasMany('payment')
   payment_methods: DS.hasMany('payment-method')
   adjustments: DS.hasMany('adjustment')
+
+  init: ->
+    @set('payment_source', SpreeCheckout.PaymentSource.create())
+    @_super()
 
   lineItemsAdjustments: ( ->
     result = []
@@ -54,3 +58,23 @@ SpreeCheckout.Order = DS.Model.extend
   eligibleAdjustments: ( ->
     @get('adjustments').filterBy('eligible')
   ).property('adjustments')
+
+  hasAddress: ( ->
+    @hasStep('address')
+  ).property('checkout_steps')
+
+  hasDelivery: ( ->
+    @hasStep('delivery')
+  ).property('checkout_steps')
+
+  hasPayment: ( ->
+    @hasStep('payment')
+  ).property('checkout_steps')
+
+  hasConfirm: ( ->
+    @hasStep('confirm')
+  ).property('checkout_steps')
+
+  hasStep: (step) ->
+    @get('checkout_steps').contains(step)
+
