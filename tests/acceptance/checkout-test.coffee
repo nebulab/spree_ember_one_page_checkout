@@ -42,11 +42,12 @@ test 'it shows line items', (assert) ->
     assert.equal(find('.cart-item-description h4:last').text(), 'Ruby on Rails Tote')
 
 test 'it changes cart total', (assert) ->
-  assert.expect(3)
+  assert.expect(5)
 
   visit('/checkout').then ->
     fillIn('.cart-item-quantity:first', 4).then ->
-      assert.equal(find('.cart-total h5:last').text(), '$91.95')
+      click('.cart-item-quantity:first button').then ->
+        assert.equal(find('.cart-total h5:last').text(), '$111.94')
 
-      assert.equal(find('td.cart-item-total:first').text().trim(), '$79.96')
-      assert.equal(find('td.cart-item-total:last').text().trim(), '$31.98')
+        assert.equal(find('td.cart-item-total:first').text().trim(), '$79.96')
+        assert.equal(find('td.cart-item-total:last').text().trim(), '$31.98')

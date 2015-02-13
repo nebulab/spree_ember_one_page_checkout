@@ -1,7 +1,6 @@
 `import Ember from 'ember'`
 
 LineItemComponent = Ember.Component.extend
-
   quantities: [1..10]
 
   actions:

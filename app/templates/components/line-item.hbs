@@ -13,7 +13,8 @@
     {{item.single_display_amount}}
   </td>
   <td class="cart-item-quantity" data-hook="cart_item_quantity">
-    {{input value=item.quantity action="changeQuantity" on="focus-out"}}
+    {{input value=item.quantity}}
+    <button {{action 'changeQuantity'}}>Update</button>
   </td>
   <td class="cart-item-total" data-hook="cart_item_total">
     {{item.display_amount}}
