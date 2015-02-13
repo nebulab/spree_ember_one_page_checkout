@@ -15,15 +15,16 @@ moduleFor 'serializer:order', 'OrderSerializer', {
 
   teardown: ->
     Ember.run application, 'destroy'
+
+  needs: [transform:string]
 }
 
-# QUnit.skip 'it sets payload number as order id', ->
-#   serializer = @subject()
-#
-#   application.__container__.register('transform:string', DS.StringTransform)
-#   store = application.__container__.lookup('store:main')
-#
-#   jsonHash = { id: 940, number: "R362248067" }
-#   serializer.extractSingle(store, store.modelFor('order'), jsonHash, 'R362248067')
-#
-#   equal(serializer.extractSingle(store, store.modelFor('order'), jsonHash, 'R362248067').id, 'R362248067')
+test 'it sets payload number as order id', ->
+  serializer = @subject()
+
+  store = application.__container__.lookup('store:main')
+
+  jsonHash = { id: '940', number: "R362248067" }
+  serializer.extractSingle(store, store.modelFor('order'), jsonHash, 'R362248067')
+
+  equal(serializer.extractSingle(store, store.modelFor('order'), jsonHash, 'R362248067').get('id'), 'R362248067')
