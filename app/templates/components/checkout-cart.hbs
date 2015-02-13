@@ -1,0 +1,69 @@
+<div data-hook="cart_items">
+  <table id="cart-detail" data-hook>
+    <thead>
+      <tr data-hook="cart_items_headers">
+        <th class="cart-item-description-header" colspan="2">Item</th>
+        <th class="cart-item-price-header">Price</th>
+        <th class="cart-item-quantity-header">Qty</th>
+        <th class="cart-item-total-header">Total</th>
+        <th class="cart-item-delete-header"></th>
+      </tr>
+    </thead>
+
+    {{#each lineItem in order.lineItems}}
+      {{line-item item=lineItem}}
+    {{/each}}
+
+    <tr class="cart-subtotal">
+      <td colspan="4" align='right'><h5>Subtotal ({{total_quantity}} item)</h5></td>
+      <td colspan><h5>{{display_item_total}}</h5></td>
+      <td></td>
+    </tr>
+    <tbody id="cart_adjustments" data-hook>
+      {{#each adjustment in lineItemsAdjustments}}
+        <tr class="adjustment">
+          <td colspan="4" align='right'><h5>Promotion: {{adjustment.label}}</h5></td>
+          <td colspan='2'>
+            <h5>{{money adjustment.amount}}</h5>
+          </td>
+        </tr>
+      {{/each}}
+
+      <tr class="adjustment">
+        <td colspan="4" align='right'><h5>Tax: {{adjustment.label}}</h5></td>
+        <td colspan='2'>
+          <h5>{{order.display_tax_total}}</h5>
+        </td>
+      </tr>
+
+      {{#each shipment in shipments}}
+        <tr>
+          <td colspan="4" align='right'><h5>Shipping: {{shipment.selectedShippingRate.name}}</h5></td>
+          <td colspan='2'>
+            <h5>{{shipment.selectedShippingRate.display_cost}}</h5>
+          </td>
+        </tr>
+      {{/each}}
+
+      {{#each adjustment in eligibleAdjustments}}
+        <tr class="adjustment">
+          <td colspan="4" align='right'><h5>Adjustment: {{adjustment.label}}</h5></td>
+          <td colspan='2'>
+            <h5>{{adjustment.display_amount}}</h5>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+    <tr class="cart-total">
+      <td colspan="4" align='right'><h5>Total</h5></td>
+      <td colspan><h5>{{order.displayTotal}}</h5></td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+
+<div class="links columns sixteen alpha omega" data-hook="cart_buttons">
+  {{input value=coupon_code size=10 placeholder='Coupon Code'}}
+  <button class='button checkout primary' id='checkout-link' {{action 'applyCoupon'}}>Apply Coupon</button>
+  <button class='button checkout primary' id='checkout-link' {{action 'continue'}}>Continua</button>
+</div>

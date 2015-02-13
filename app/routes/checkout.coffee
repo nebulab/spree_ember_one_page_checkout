@@ -2,6 +2,6 @@
 
 CheckoutRoute = Ember.Route.extend
   model: ->
-    @store.find('order', @get('spree').current_order_id())
+    @store.find('order', @get('spree.currentOrderId'))
 
 `export default CheckoutRoute`

@@ -1,0 +1,22 @@
+<td class="cart-item-image" data-hook="cart_item_image">
+  <img {{bind-attr src=item.variant.default_image.small_url}} />
+</td>
+<td class="cart-item-description" data-hook="cart_item_description">
+  <h4>{{item.variant.name}}</h4>
+  {{item.variant.options_text}}
+  <span class="line-item-description" data-hook="line_item_description">
+    {{item.variant.description}}
+  </span>
+</td>
+<td class="cart-item-price" data-hook="cart_item_price">
+  {{item.single_display_amount}}
+</td>
+<td class="cart-item-quantity" data-hook="cart_item_quantity">
+  {{view "select" content=quantities value=item.quantity}}
+</td>
+<td class="cart-item-total" data-hook="cart_item_total">
+  {{item.display_amount}}
+</td>
+<td class="cart-item-delete" data-hook="cart_item_delete">
+  <span {{action 'remove'}}>X</span>
+</td>
