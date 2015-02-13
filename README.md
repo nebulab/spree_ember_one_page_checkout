@@ -1,24 +1,33 @@
 # Spree-checkout
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+An Ember.js application to handle Spree checkout.
 
 ## Prerequisites
 
-You will need the following things properly installed on your computer.
+You'll need a Spree store running at on [localhost on port 3001](http://localhost:3001).
 
-* [Git](http://git-scm.com/)
-* [Node.js](http://nodejs.org/) (with NPM)
-* [Bower](http://bower.io/)
-* [Ember CLI](http://www.ember-cli.com/)
-* [PhantomJS](http://phantomjs.org/)
+* `cd Code/my_spree_store`
+* `bundle exec rails server -p 3001`
+
+For now, authentication stuff is not yet ready. You'll need your user to have
+the following spree_api_key:
+
+`f1d12fc2051b5f596d7460a35561a1f1a8a5bb2fb26f695d`
+
+You can easily set it with something like this on the rails console:
+
+```
+Spree::User.first.update_attribute(:spree_api_key, 'f1d12fc2051b5f596d7460a35561a1f1a8a5bb2fb26f695d')
+```
 
 ## Installation
 
 * `git clone <repository-url>` this repository
 * change into the new directory
-* `npm install`
-* `bower install`
+* `npm install -g ember-cli`
+* `npm install -g bower`
+* `npm install -g phantomjs`
+* `ember install`
 
 ## Running / Development
 
@@ -42,12 +51,3 @@ Make use of the many generators for code, try `ember help generate` for more det
 ### Deploying
 
 Specify what it takes to deploy your app.
-
-## Further Reading / Useful Links
-
-* [ember.js](http://emberjs.com/)
-* [ember-cli](http://www.ember-cli.com/)
-* Development Browser Extensions
-  * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
-  * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
-
