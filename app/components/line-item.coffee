@@ -4,11 +4,11 @@ LineItemComponent = Ember.Component.extend
 
   quantities: [1..10]
 
-  onQuantityDidChange: ( ->
-    @get('item').save()
-  ).observes('item.quantity')
-
   actions:
+    changeQuantity: ->
+      @get('item').save().then (item) ->
+        item.get('order').reload()
+
     remove: ->
       @get('item').destroyRecord()
 

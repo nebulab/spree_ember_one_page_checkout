@@ -18,6 +18,11 @@ ApplicationRoute = Ember.Route.extend
           type: 'POST'
           data: { 'line_item': { 'variant_id': 26, 'quantity': 3 }}
         )
+        Ember.$.ajax(
+          url: "/api/orders/#{@get('spree.currentOrderId')}/line_items.json?token=f1d12fc2051b5f596d7460a35561a1f1a8a5bb2fb26f695d"
+          type: 'POST'
+          data: { 'line_item': { 'variant_id': 1, 'quantity': 2 }}
+        )
 
 
 `export default ApplicationRoute`
