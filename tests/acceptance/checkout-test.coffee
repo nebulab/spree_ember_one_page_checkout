@@ -62,3 +62,11 @@ test 'it changes cart total when a line item is remove', (assert) ->
       assert.equal(find('.cart-total h5:last').text(), '$31.98')
 
       assert.equal(find('td.cart-item-total:first').text().trim(), '$31.98')
+
+test 'it changes cart total when a coupon code is used', (assert) ->
+  assert.expect(1)
+
+  visit('/checkout').then ->
+    fillIn('.coupon-code:first', 1234).then ->
+      click('#apply-coupon').then ->
+        assert.equal(find('.cart-total h5:last').text(), '$25.58')

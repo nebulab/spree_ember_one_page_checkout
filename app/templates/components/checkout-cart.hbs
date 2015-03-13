@@ -63,7 +63,7 @@
 </div>
 
 <div class="links columns sixteen alpha omega" data-hook="cart_buttons">
-  {{input value=coupon_code size=10 placeholder='Coupon Code'}}
-  <button class='button checkout primary' id='checkout-link' {{action 'applyCoupon'}}>Apply Coupon</button>
+  {{input value=order.couponCode size=10 placeholder='Coupon Code' class='coupon-code'}}
+  <button class='button checkout primary' id='apply-coupon' {{action 'applyCouponCode'}}>Apply Coupon</button>
   <button class='button checkout primary' id='checkout-link' {{action 'continue'}}>Continua</button>
 </div>

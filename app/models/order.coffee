@@ -15,6 +15,8 @@ Order = DS.Model.extend
   checkoutSteps: DS.attr()
   userId: DS.attr('number')
   email: DS.attr('string')
+  couponCode: DS.attr('string')
+
 
   lineItems: DS.hasMany('line-item')
 
