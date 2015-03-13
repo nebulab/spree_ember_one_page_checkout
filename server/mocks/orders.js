@@ -228,6 +228,7 @@ module.exports = function(app) {
 
       ]
     });
+    app.set('order_state', null);
   });
 
   ordersRouter.put('/:id', function(req, res) {
