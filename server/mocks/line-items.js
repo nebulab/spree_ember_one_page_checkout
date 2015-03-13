@@ -30,6 +30,7 @@ module.exports = function(app) {
 
   lineItemsRouter.delete('/:id', function(req, res) {
     res.status(204).end();
+    app.set('order_state', 'line_item_deleted');
   });
 
   app.use('/api/orders/:order_id/line_items', lineItemsRouter);

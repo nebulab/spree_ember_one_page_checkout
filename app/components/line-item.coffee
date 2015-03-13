@@ -9,6 +9,7 @@ LineItemComponent = Ember.Component.extend
         item.get('order').reload()
 
     remove: ->
-      @get('item').destroyRecord()
+      @get('item').destroyRecord().then (item) ->
+        item.get('order').reload()
 
 `export default LineItemComponent`
