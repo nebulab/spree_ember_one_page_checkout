@@ -1,15 +1,17 @@
 `import Ember from 'ember'`
 
-SpreeService = Ember.Object.extend
+SpreeService = Ember.Service.extend
 
   currentOrder: ( ->
     @store.find('order', @get('currentOrderId'))
   ).property('currentOrderId')
 
-  currentOrderId: ->
+  currentOrderId: ( ->
     Spree.current_order_id
+  ).property()
 
-  currentOrderToken: ->
+  currentOrderToken: ( ->
     Spree.current_order_token
+  ).property()
 
 `export default SpreeService`
