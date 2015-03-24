@@ -1,0 +1,35 @@
+<div class="inner">
+  <p class="field">
+    <label for='firstname'>First Name</label><span class="required">*</span><br />
+    {{input value=address.firstname class='required'}}
+  </p>
+  <p class="field">
+    <label for='lastname'>Last Name</label><span class="required">*</span><br />
+    {{input value=address.lastname class='required'}}
+  </p>
+  <p class="field">
+    <label for='address1'>Address 1</label><span class="required">*</span><br />
+    {{input value=address.address1 class='required'}}
+  </p>
+  <p class="field">
+    <label for='address2'>Address 2</label><span class="required">*</span><br />
+    {{input value=address.address2 class='required'}}
+  </p>
+  <p class="field">
+    <label for='city'>City</label><span class="required">*</span><br />
+    {{input value=address.city class='required'}}
+  </p>
+  {{input value=address.country_id}}
+  {{input value=address.state_id}}
+
+  <p class="field">
+    <label for=zipcode>Zip Code</label><br />
+    {{input value=address.zipcode}}
+  </p>
+  <p class="field">
+    <label for=phone>Phone</label><br />
+    {{input value=address.phone}}
+  </p>
+</div>
+
+<button {{action 'save'}}>Salva Indirizzo</button>

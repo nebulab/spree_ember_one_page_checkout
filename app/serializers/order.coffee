@@ -3,6 +3,8 @@
 OrderSerializer = DS.ActiveModelSerializer.extend(DS.EmbeddedRecordsMixin,
   attrs: {
     lineItems: { embedded: 'always' }
+    shipAddress: { embedded: 'always' }
+    billAddress: { embedded: 'always' }
   }
 
   extractSingle: (store, primaryType, rawPayload, recordId) ->

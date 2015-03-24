@@ -1,5 +1,7 @@
+`import Ember from 'ember'`
 `import DS from 'ember-data'`
 `import ShipAddress from 'spree-checkout/models/ship-address'`
+`import BillAddress from 'spree-checkout/models/bill-address'`
 
 Order = DS.Model.extend
 
@@ -19,9 +21,11 @@ Order = DS.Model.extend
 
   lineItems: DS.hasMany('line-item')
   shipAddress: DS.belongsTo('ship-address')
+  billAddress: DS.belongsTo('bill-address')
 
   init: ->
     @_super()
     @set('shipAddress', @store.createRecord('shipAddress'))
+    @set('billAddress', @store.createRecord('billAddress'))
 
 `export default Order`

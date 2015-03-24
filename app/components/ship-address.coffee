@@ -1,13 +1,10 @@
 `import Ember from 'ember'`
+`import SpreeAddress from './spree-address'`
 
-ShipAddressComponent = Ember.Component.extend
+ShipAddressComponent = SpreeAddress.extend
 
   address: ( ->
     @get('spree.currentOrder.shipAddress')
   ).property('spree.currentOrder.shipAddress')
-
-  actions:
-    save: ->
-      @get('address').save()
 
 `export default ShipAddressComponent`

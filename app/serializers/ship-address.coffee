@@ -1,11 +1,8 @@
 `import DS from 'ember-data'`
+`import AddressSerializer from './address'`
 
-ShipAddressSerializer = DS.ActiveModelSerializer.extend
+ShipAddressSerializer = AddressSerializer.extend
 
-  serializeIntoHash: (data, type, snapshot, options) ->
-    data['order'] = @serialize(snapshot, options)
-
-  serialize: (snapshot, options) ->
-    { 'ship_address_attributes': @_super(snapshot, options) }
+  rootKey: 'ship_address_attributes'
 
 `export default ShipAddressSerializer`
