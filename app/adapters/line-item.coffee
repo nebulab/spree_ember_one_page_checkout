@@ -2,8 +2,7 @@
 
 LineItemAdapter = ApplicationAdapter.extend
 
-  namespace: ( ->
-    "api/orders/#{@get('spree.currentOrderId')}"
-  ).property()
+  pathForType: (type) ->
+   "#{@_super('order')}/#{@get('spree.currentOrderId')}/#{@_super(type)}"
 
 `export default LineItemAdapter`

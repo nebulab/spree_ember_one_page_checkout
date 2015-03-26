@@ -10,5 +10,5 @@ test 'it has correct namespace', ->
 
 test 'it appends order token to the url', ->
   adapter = @subject()
-  adapter.set('spree', {'currentOrderToken': '123'})
+  adapter.set('spree', { 'currentOrderToken': '123'} )
   equal(adapter.buildURL(), '/api?order_token=123')

@@ -21,6 +21,7 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
+    ENV.APP.SPREE_TOKEN = 'f1d12fc2051b5f596d7460a35561a1f1a8a5bb2fb26f695d';
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;

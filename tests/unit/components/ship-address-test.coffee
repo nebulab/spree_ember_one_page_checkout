@@ -1,6 +1,6 @@
 `import { test, moduleForComponent } from 'ember-qunit'`
 
-moduleForComponent 'ship-address', {
+moduleForComponent 'ship-address', 'ShipAddressComponent', {
   # specify the other units that are required for this test
   # needs: ['component:foo', 'helper:bar']
 }

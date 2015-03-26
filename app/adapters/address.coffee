@@ -8,6 +8,6 @@ AddressAdapter = ApplicationAdapter.extend
 
     serializer.serializeIntoHash(data, type, snapshot, { includeId: true });
 
-    @ajax(@buildURL('checkouts' , @get('spree.currentOrderId'), snapshot), "PUT", { data: data });
+    @ajax(@buildURL('checkouts', @get('spree.currentOrderId'), snapshot), "PUT", { data: data });
 
 `export default AddressAdapter`

@@ -5,7 +5,7 @@ moduleFor 'adapter:line-item', 'LineItemAdapter', {
   # needs: ['serializer:foo']
 }
 
-# Replace this with your real tests.
-test 'it exists', (assert) ->
+test 'lineItemAdapter.pathForType() returns order nested resource path', ->
   adapter = @subject()
-  assert.ok adapter
+  adapter.set('spree', { 'currentOrderId': '123'} )
+  equal(adapter.pathForType('lineItem'), 'orders/123/line_items')
